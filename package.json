@@ -1,0 +1,12 @@
+{
+    "name": "justalistsrv",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+    },
+    "devDependencies": {
+      "unexpected": "^10.29.0"
+    },
+    "scripts": {
+    }
+  }

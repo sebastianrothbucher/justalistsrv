@@ -1,12 +1,14 @@
-const cols = (app, client, req, resp) => {
-    client.query('select c.id, c.name, cc.colid, cc.value, cc.color from col c join colchoice cc on c.id=cc.colid where c.wsid=$1 order by c.id, cc.id', [req.params.wsId], function (err) {
-        if (!err) { // deserialize res
-            let res = [];
-            // TODO: here
-        } else {
-            reject(err);
-        }
-    });
+//const colsDao = require('../dao/cols');
+import colsDao from '../dao/cols';
+
+const colsEndpoint = (app, client, req, resp) => {
+    return colsDao(client, req.params.wsId)
+        .then(resp.send)
+        .catch(err => {
+            console.log("error retrieving cols", err);
+            resp.send(500);
+            resp.send("error retrieving cols");
+        });
 };
 
-export default cols;
+export default colsEndpoint;

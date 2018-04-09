@@ -17,4 +17,4 @@ app.use(cors());
 app.use(morgan('combined'));
 
 const colsEndpoint = require('./endpoints/cols');
-app.get("/:wsId/cols" /*req.params.wsId*/, (req, resp) => colsEndpoint(app, client, req, resp));
+app.get("/:wsId/cols", (req, resp) => colsEndpoint(app, client, req, resp));

@@ -1,12 +1,16 @@
 const colsDao = (client, wsId) => new Promise((resolve, reject) => {
-    client.query('select c.id, c.name, cc.colid, cc.value, cc.color from col c join colchoice cc on c.id=cc.colid where c.wsid=$1 order by c.id, cc.id', [req.params.wsId], function (err) {
-        if (!err) { // deserialize res
+    client.query('select c.id::int, c.name, cc.colid::int, cc.value, cc.color from col c join colchoice cc on c.id=cc.colid where c.wsid=$1 order by c.id, cc.id', [wsId], (err, rows) => {
+        if (!err) { // deserialize res - can assume ordered
             let res = [];
-            // TODO: here
+            let currColId = null;
+            debugger;            
         } else {
             reject(err);
         }
     });
 });
 
-export default colsDao;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = colsDao;

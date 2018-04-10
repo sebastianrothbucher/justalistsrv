@@ -1,5 +1,5 @@
-import normalizeArray from './normalize-array';
 import unexpected from 'unexpected';
+import normalizeArray from './normalize-array';
 
 const expect = unexpected.clone();
 

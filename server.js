@@ -16,5 +16,9 @@ const app = express();
 app.use(cors());
 app.use(morgan('combined'));
 
-const colsEndpoint = require('./endpoints/cols');
+const colsEndpoint = require('./endpoints/cols').default; // plain node still requires us to require ;-) (thx babel-cli!)
 app.get("/:wsId/cols", (req, resp) => colsEndpoint(app, client, req, resp));
+
+const port = process.env.PORT || 8080;
+console.info("Listening on " + port);
+app.listen(port);

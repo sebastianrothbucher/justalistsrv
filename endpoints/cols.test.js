@@ -20,7 +20,7 @@ describe("cols endpoint", () => {
         }); // (catch is handled by the framework)
     });
 
-    it("pulls cols from dao", () => {
+    it("pulls cols from dao handling error", () => {
         const clientStub = {client: true};
         const colsDaoMock = require('../dao/cols').default;
         const resp = {status: jest.fn(), send: jest.fn()};

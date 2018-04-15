@@ -8,6 +8,10 @@ const expect = unexpected.clone();
 
 describe("cols endpoint", () => {
 
+    beforeEach(() => {
+        colsDaoMock.mockClear();
+    });
+
     it("pulls cols from dao", () => {
         const clientStub = {client: true};
         const mockRes = [{id: 1}];

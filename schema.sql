@@ -37,6 +37,9 @@ CREATE SEQUENCE seq_colchoice_id;
 CREATE TABLE rec
 (
     id bigint NOT NULL,
+    version integer NOT NULL, 
+    versiondate timestamp with time zone NOT NULL,
+    archived boolean NOT NULL,
     wsid bigint NOT NULL,
     title text,
     CONSTRAINT rec_pkey PRIMARY KEY (id),

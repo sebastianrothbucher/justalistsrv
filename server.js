@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const pg = require('pg');
 let client = new pg.Client(process.env.DATABASE ||
-    "postgres://justalist:justalist@localhost/justalist");
+    "postgres://justalist:justalist@localhost/justalist"); // TODO: pool
 client.connect(err => {
     if (err) {
         throw err;

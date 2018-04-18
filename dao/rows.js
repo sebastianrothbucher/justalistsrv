@@ -15,7 +15,7 @@ const rowsDao = (client, wsId, sortMode, sortCol, skip, limit) => client.query('
         return res;
     });
 
-const rowsInsertDao = (client, wsId, newRec) => client.query('select nextval(\'seq_rec_id\') as newid::int', [])
+const rowInsertDao = (client, wsId, newRec) => client.query('select n.newid::int from (select nextval(\'seq_rec_id\') as newid) n', [])
     .then(dbres => dbres.rows[0].newid)
     .then(newRecId => {
         return Promise.all([
@@ -30,6 +30,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = rowsDao;
-exports.insert = rowsInsertDao;
+exports.insert = rowInsertDao;
 exports.SORT_MODE_TITLE = "title";
 exports.SORT_MODE_COL = "col";

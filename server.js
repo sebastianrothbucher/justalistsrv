@@ -23,6 +23,8 @@ const rowsEndpoint = require('./endpoints/rows').default;
 app.get("/:wsId/rows", (req, resp) => rowsEndpoint(app, client, req, resp));
 const rowInsertEndpoint = require('./endpoints/rows').insert;
 app.post("/:wsId/rows", (req, resp) => rowInsertEndpoint(app, client, req, resp));
+const rowUpdateEndpoint = require('./endpoints/rows').update;
+app.put("/:wsId/rows/:cid", (req, resp) => rowUpdateEndpoint(app, client, req, resp));
 
 const port = process.env.PORT || 8080;
 console.info("Listening on " + port);

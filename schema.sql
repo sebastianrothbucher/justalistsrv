@@ -55,6 +55,8 @@ CREATE INDEX fki_rec_wsid_fk
     ON rec (wsid);
 CREATE INDEX i_rec_title
     ON rec (wsid, title);
+CREATE INDEX i_rec_cid_version
+    ON rec (cid, version);
 CREATE SEQUENCE seq_rec_id;
 CREATE SEQUENCE seq_rec_cid;
 

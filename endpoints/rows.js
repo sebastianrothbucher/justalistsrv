@@ -19,7 +19,7 @@ const _internalInsertUpd = (client, req, resp, _resolve) => {
     const newUpdRec = req.body;
     let resolution;
     if ((!!newUpdRec) && typeof(newUpdRec) === 'object') { // could actually validate quite more
-        resolution = _resolve(client, req.params.wsId, newUpdRec, q.ignoreVersion || false);
+        resolution = _resolve(client, req.params.wsId, newUpdRec, q.ignoreVersion === "true");
     } else {
         resolution = Promise.reject("No new record as JSON");
     }

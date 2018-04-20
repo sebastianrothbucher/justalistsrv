@@ -95,7 +95,7 @@ describe("rows endpoint", () => {
         const clientStub = {client: true};
         const resp = {status: jest.fn(), send: jest.fn()};
         rowUpdateDaoMock.mockReturnValueOnce(Promise.resolve({ok: true}));
-        return updateEndpoint(null, clientStub, {params: {wsId: 88, cid: 99}, query: {ignoreVersion: true}, body: {testrec: true}}, resp). then(() => {
+        return updateEndpoint(null, clientStub, {params: {wsId: 88, cid: 99}, query: {ignoreVersion: "true"}, body: {testrec: true}}, resp). then(() => {
             expect(rowUpdateDaoMock.mock.calls, 'to exhaustively satisfy', [[clientStub, 88, {testrec: true, cid: 99}, true]]); // use the best of jest and unexpected - w/ a little help
             expect(resp.status.mock.calls, 'to exhaustively satisfy', []);
             expect(resp.send.mock.calls, 'to exhaustively satisfy', [[{ok: true}]]);

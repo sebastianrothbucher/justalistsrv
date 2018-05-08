@@ -16,7 +16,7 @@ describe("rows endpoint", () => {
 
     it("pulls rows from dao", () => {
         const clientStub = {client: true};
-        const mockRes = [{id: 1}];
+        const mockRes = [{_id: 1}];
         const resp = {status: jest.fn(), send: jest.fn()};
         rowsDaoMock.mockReturnValueOnce(Promise.resolve(mockRes));
         return endpoint(null, clientStub, {params: {wsId: 88}, query: {sortMode: "col", sortCol: "c1", skip: 20, limit: 30}}, resp).then(() => {
@@ -28,7 +28,7 @@ describe("rows endpoint", () => {
 
     it("pulls rows from dao using defaults", () => {
         const clientStub = {client: true};
-        const mockRes = [{id: 1}];
+        const mockRes = [{_id: 1}];
         const resp = {status: jest.fn(), send: jest.fn()};
         rowsDaoMock.mockReturnValueOnce(Promise.resolve(mockRes));
         return endpoint(null, clientStub, {params: {wsId: 88}}, resp).then(() => {

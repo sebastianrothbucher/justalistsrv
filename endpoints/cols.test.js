@@ -14,7 +14,7 @@ describe("cols endpoint", () => {
 
     it("pulls cols from dao", () => {
         const clientStub = {client: true};
-        const mockRes = [{id: 1}];
+        const mockRes = [{_id: 1}];
         const resp = {status: jest.fn(), send: jest.fn()};
         colsDaoMock.mockReturnValueOnce(Promise.resolve(mockRes));
         return endpoint(null, clientStub, {params: {wsId: 88}}, resp).then(() => {

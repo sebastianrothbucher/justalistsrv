@@ -4,12 +4,12 @@ const rowsDao = (client, wsId, sortMode, sortCol, skip, limit) => client.query('
         let res = [];
         let currRow = null;
         dbres.rows.forEach(dbrow => {
-            if ((!currRow) || currRow.id !== dbrow.id) {
-                currRow = { id: dbrow.id, cid: dbrow.cid, version: dbrow.version, versiondate: (dbrow.versiondate ? dbrow.versiondate.getTime() : null), title: dbrow.title, cols: [] };
+            if ((!currRow) || currRow._id !== dbrow.id) {
+                currRow = { _id: dbrow.id, cid: dbrow.cid, version: dbrow.version, versiondate: (dbrow.versiondate ? dbrow.versiondate.getTime() : null), title: dbrow.title, colvalues: {} };
                 res.push(currRow);
             }
             if (typeof (dbrow.colid) === "number") {
-                currRow.cols.push({id: dbrow.colid, name: dbrow.name, value: dbrow.value});
+                currRow.colvalues[dbrow.colid] = dbrow.value;
             }
         });
         return res;
@@ -19,8 +19,8 @@ const _internalInsert = (client, wsId, newUpdRec, newVersion) => client.query('s
     .then(dbres => dbres.rows[0].newid)
     .then(newUpdRecId => Promise.all([
         client.query('insert into rec (id, wsid, cid, version, versiondate, archived, title) values ($1, $2, $3, $4, now(), FALSE, $5)', [newUpdRecId, wsId, newUpdRec.cid, newVersion, newUpdRec.title])
-    ].concat(newUpdRec.cols.map(col => client.query('insert into reccol (id, recid, colid, value) values(nextval(\'seq_reccol_id\'), $1, $2, $3)', [newUpdRecId, col.id, col.value]))))
-        .then(() => ({ ok: true, id: newUpdRecId, version: newVersion})));
+    ].concat(Object.keys(newUpdRec.colvalues).map(colid => client.query('insert into reccol (id, recid, colid, value) values(nextval(\'seq_reccol_id\'), $1, $2, $3)', [newUpdRecId, colid, newUpdRec.colvalues[colid]]))))
+        .then(() => ({ ok: true, _id: newUpdRecId, version: newVersion})));
 
 const rowInsertDao = (client, wsId, newRec) => client.query('select n.newcid::int from (select nextval(\'seq_rec_cid\') as newcid) n')
     .then(dbres => dbres.rows[0].newcid)

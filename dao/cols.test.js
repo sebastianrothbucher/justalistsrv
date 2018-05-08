@@ -17,11 +17,11 @@ describe("cols dao", () => {
             expect(clientMock.query.mock.calls.length, 'to be', 1);
             expect(clientMock.query.mock.calls[0], 'to satisfy', [/select.*from col c.*/, [111]]);
             expect(res, 'to equal', [
-                {id: 88, name: "col1", values: [
+                {_id: 88, name: "col1", choices: [
                     {value: "v1"},
                     {value: "v2", color: "c2"}
                 ]},
-                {id: 89, name: "col2", values: [
+                {_id: 89, name: "col2", choices: [
                     {value: "vv1", color: "cc1"}
                 ]}
             ]);

@@ -3,12 +3,12 @@ const colsDao = (client, wsId) => client.query('select c.id::int, c.name, cc.val
         let res = [];
         let currCol = null;
         dbres.rows.forEach(dbrow => {
-            if ((!currCol) || currCol.id !== dbrow.id) {
-                currCol = { id: dbrow.id, name: dbrow.name, values: [] };
+            if ((!currCol) || currCol._id !== dbrow.id) {
+                currCol = { _id: dbrow.id, name: dbrow.name, choices: [] };
                 res.push(currCol);
             }
             if (typeof (dbrow.value) === "string") {
-                currCol.values.push({value: dbrow.value, color: dbrow.color});
+                currCol.choices.push({value: dbrow.value, color: dbrow.color});
             }
         });
         return res;

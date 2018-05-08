@@ -17,13 +17,8 @@ describe("rows dao", () => {
             expect(clientMock.query.mock.calls.length, 'to be', 1);
             expect(clientMock.query.mock.calls[0], 'to satisfy', [/select.*from rec.*limit.*c.*/, [111, 10]]);
             expect(res, 'to satisfy', [
-                {id: 88, title: "row1", cols: [
-                    {id: 1, name: "col1", value: "v1"},
-                    {id: 2, name: "col2", value: "v2"}
-                ]},
-                {id: 89, title: "row2", cols: [
-                    {id: 1, name: "col1", value: "vv1"}
-                ]}
+                {_id: 88, title: "row1", colvalues: { 1: "v1", 2: "v2" } },
+                {_id: 89, title: "row2", colvalues: { 1: "vv1" } }
             ]);
         }); // (catch is handled by the framework)
     });

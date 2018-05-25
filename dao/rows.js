@@ -22,9 +22,15 @@ const _internalInsert = (client, wsId, newUpdRec, newVersion) => client.query('s
     ].concat(Object.keys(newUpdRec.colvalues).map(colid => client.query('insert into reccol (id, recid, colid, value) values(nextval(\'seq_reccol_id\'), $1, $2, $3)', [newUpdRecId, colid, newUpdRec.colvalues[colid]]))))
         .then(() => ({ ok: true, _id: newUpdRecId, version: newVersion})));
 
-const rowInsertDao = (client, wsId, newRec) => client.query('select n.newcid::int from (select nextval(\'seq_rec_cid\') as newcid) n')
+const rowInsertDao = (client, wsId, newRec) => client.query('begin')
+    .then(() => client.query('select n.newcid::int from (select nextval(\'seq_rec_cid\') as newcid) n'))
     .then(dbres => dbres.rows[0].newcid)
-    .then(newRecCid => _internalInsert(client, wsId, {...newRec, cid: newRecCid}, 1)); // no transaction needed
+    .then(newRecCid => _internalInsert(client, wsId, {...newRec, cid: newRecCid}, 1)) // TODO: simulate w/ error once
+    .then(res => client.query('commit').then(() => res))
+    .catch(err => {
+        client.query('rollback'); // best effort
+        throw err;
+    });
 
 const rowUpdateDao = (client, wsId, updRec, ignoreVersion) => client.query('begin') // check version is active, set existing inactive, add new, all within a transaction
     .then(() => ignoreVersion ? (client.query('select m.maxv::int from (select max(version) as maxv from rec where cid=$1) m', [updRec.cid])
@@ -37,10 +43,10 @@ const rowUpdateDao = (client, wsId, updRec, ignoreVersion) => client.query('begi
                 throw { extmsg: "Illegal state - more than one matching record; should never happen" };
             }
         }).then(() => updateVersion))
-    .then(updateVersion => _internalInsert(client, wsId, updRec, updateVersion + 1))
+    .then(updateVersion => _internalInsert(client, wsId, updRec, updateVersion + 1)) // TODO: simulate w/ error once
     .then(res => client.query('commit').then(() => res))
     .catch(err => {
-        client.query('rollback') // best effort
+        client.query('rollback'); // best effort
         throw err;
     });
 

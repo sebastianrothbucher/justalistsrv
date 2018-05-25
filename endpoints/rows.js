@@ -14,7 +14,7 @@ const rowsEndpoint = (app, client, req, resp) => {
         });
 };
 
-const _internalInsertUpd = (client, req, resp, _resolve) => {
+const _internalInsertUpd = (client, req, resp, _resolve) => { // one can think long & hard about just overwriting the cid - let's do this for now
     const q = (req.query || {});
     const newUpdRec = req.body;
     let resolution;

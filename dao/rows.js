@@ -25,7 +25,7 @@ const _internalInsert = (client, wsId, newUpdRec, newVersion) => client.query('s
 const rowInsertDao = (client, wsId, newRec) => client.query('begin')
     .then(() => client.query('select n.newcid::int from (select nextval(\'seq_rec_cid\') as newcid) n'))
     .then(dbres => dbres.rows[0].newcid)
-    .then(newRecCid => _internalInsert(client, wsId, {...newRec, cid: newRecCid}, 1)) // TODO: simulate w/ error once
+    .then(newRecCid => _internalInsert(client, wsId, {...newRec, cid: newRecCid}, 1))
     .then(res => client.query('commit').then(() => res))
     .catch(err => {
         client.query('rollback'); // best effort
@@ -43,7 +43,7 @@ const rowUpdateDao = (client, wsId, updRec, ignoreVersion) => client.query('begi
                 throw { extmsg: "Illegal state - more than one matching record; should never happen" };
             }
         }).then(() => updateVersion))
-    .then(updateVersion => _internalInsert(client, wsId, updRec, updateVersion + 1)) // TODO: simulate w/ error once
+    .then(updateVersion => _internalInsert(client, wsId, updRec, updateVersion + 1))
     .then(res => client.query('commit').then(() => res))
     .catch(err => {
         client.query('rollback'); // best effort

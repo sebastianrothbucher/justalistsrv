@@ -19,7 +19,7 @@ const _internalInsert = (client, wsId, newUpdRec, newVersion) => client.query('s
     .then(dbres => dbres.rows[0].newid)
     .then(newUpdRecId => Promise.all([
         client.query('insert into rec (id, wsid, cid, version, versiondate, archived, title) values ($1, $2, $3, $4, now(), FALSE, $5)', [newUpdRecId, wsId, newUpdRec.cid, newVersion, newUpdRec.title])
-    ].concat(Object.keys(newUpdRec.colvalues).map(colid => client.query('insert into reccol (id, recid, colid, value) values(nextval(\'seq_reccol_id\'), $1, $2, $3)', [newUpdRecId, colid, newUpdRec.colvalues[colid]]))))
+    ].concat(Object.keys(newUpdRec.colvalues).map(colid => client.query('insert into reccol (id, recid, colid, value) values(nextval(\'seq_reccol_id\'), $1, $2, $3)', [newUpdRecId, parseInt(colid), newUpdRec.colvalues[colid]]))))
         .then(() => ({ ok: true, _id: newUpdRecId, version: newVersion})));
 
 const rowInsertDao = (client, wsId, newRec) => client.query('begin')

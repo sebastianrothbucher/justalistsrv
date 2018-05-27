@@ -8,7 +8,7 @@ const rowsEndpoint = (app, client, req, resp) => {
         .then(res => {
             resp.send(res);
         }).catch(err => {
-            console.log("error retrieving rows", err);
+            console.error("error retrieving rows", err);
             resp.status(500);
             resp.send("error retrieving rows");
         });
@@ -26,7 +26,7 @@ const _internalInsertUpd = (client, req, resp, _resolve) => { // one can think l
     return resolution.then(res => {
         resp.send(res);
     }).catch(err => {
-        console.log("error writing row", err.extmsg ? err.extmsg : err);
+        console.error("error writing row", err.extmsg ? err.extmsg : err);
         resp.status(500);
         resp.send("error writing row" + (err.extmsg ? (" - " + err.extmsg): ""));
     });

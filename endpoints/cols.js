@@ -5,7 +5,7 @@ const colsEndpoint = (app, client, req, resp) => {
         .then(res => {
             resp.send(res);
         }).catch(err => {
-            console.log("error retrieving cols", err);
+            console.error("error retrieving cols", err);
             resp.status(500);
             resp.send("error retrieving cols");
         });

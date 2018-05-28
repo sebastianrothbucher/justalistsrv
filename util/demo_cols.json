@@ -1,0 +1,38 @@
+[
+	{
+		"_id": 2,
+		"name": "Content",
+		"choices": [
+			{
+				"value": "Bullets",
+				"color": "grey"
+			},
+			{
+				"value": "Draft",
+				"color": "yellow"
+			},
+			{
+				"value": "RC",
+				"color": "green"
+			},
+			{
+				"value": "needs more love",
+				"color": "red"
+			}
+		]
+	},
+	{
+		"_id": 3,
+		"name": "Review",
+		"choices": [
+			{
+				"value": "init check",
+				"color": "yellow"
+			},
+			{
+				"value": "proofread",
+				"color": "green"
+			}
+		]
+	}
+]

@@ -1,0 +1,34 @@
+[
+	{
+		"_id": 45,
+		"cid": 18,
+		"version": 1,
+		"versiondate": 1527438169285,
+		"title": "Chapter 1 - React",
+		"colvalues": {
+			"2": "Draft"
+		}
+	},
+	{
+		"_id": 46,
+		"cid": 19,
+		"version": 1,
+		"versiondate": 1527438202302,
+		"title": "Chapter 2 - Jest",
+		"colvalues": {
+			"2": "RC",
+			"3": "init check"
+		}
+	},
+	{
+		"_id": 47,
+		"cid": 20,
+		"version": 1,
+		"versiondate": 1527438237004,
+		"title": "Chapter 3 - NPM",
+		"colvalues": {
+			"2": "needs more love",
+			"3": "whatever"
+		}
+	}
+]

@@ -1,0 +1,143 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-05-28T14:31:53.920Z",
+	"__export_source": "insomnia.desktop.app:v5.16.1",
+	"resources": [
+		{
+			"_id": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"created": 1523690890766,
+			"description": "",
+			"modified": 1523690890766,
+			"name": "justalist",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_97ec243cebd649fc95cba20bf35bd2be",
+			"color": null,
+			"created": 1523690890782,
+			"data": {},
+			"isPrivate": false,
+			"modified": 1523690890782,
+			"name": "New Environment",
+			"parentId": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_9b7fe5059d3b4cbfa233d76037531016",
+			"cookies": [],
+			"created": 1523690890787,
+			"modified": 1523690890787,
+			"name": "Default Jar",
+			"parentId": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_cacbddc4e6604e7fb95d8ac3b2721444",
+			"authentication": {},
+			"body": {},
+			"created": 1523690756889,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524160668979,
+			"method": "GET",
+			"modified": 1525804712509,
+			"name": "cols",
+			"parameters": [],
+			"parentId": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8080/1/cols",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4c407bc0507d46b1b93999a9dc561e3f",
+			"authentication": {},
+			"body": {},
+			"created": 1523822765135,
+			"description": "",
+			"headers": [],
+			"isPrivate": false,
+			"metaSortKey": -1524160668954,
+			"method": "GET",
+			"modified": 1525804707970,
+			"name": "rows",
+			"parameters": [],
+			"parentId": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8080/1/rows?limit=20",
+			"_type": "request"
+		},
+		{
+			"_id": "req_952184e7d0224f21a971336f7112297b",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"title\": \"Chapter 3 - NPM\",\n\t\"colvalues\": { \"2\": \"needs more love\", \"3\": \"whatever\" }\n}"
+			},
+			"created": 1524071062120,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_825892c917ea485eb1a0184266139de8",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1524160668941.5,
+			"method": "POST",
+			"modified": 1527438235497,
+			"name": "row add",
+			"parameters": [],
+			"parentId": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8080/1/rows",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3ac47f283dff4dd1a00a35c6eb9b4993",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"version\": 1,\n\t\"versiondate\": 1527434943237,\n\t\"title\": \"Test new row 14b\",\n\t\"colvalues\": {\n\t\t\"2\": \"whatever 88b\"\n\t}\n}"
+			},
+			"created": 1524160668929,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_4a8842d1bc2346b29c8c95fc6347c486",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1524160668929,
+			"method": "PUT",
+			"modified": 1527435065064,
+			"name": "row update",
+			"parameters": [],
+			"parentId": "wrk_6ea6c93afa5e42f89f53886823ffe682",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8080/1/rows/17?ignoreVersion=true",
+			"_type": "request"
+		}
+	]
+}

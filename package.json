@@ -13,12 +13,18 @@
     "pg": "^7.4.1"
   },
   "devDependencies": {
-    "jest": "^22.4.3",
     "babel-preset-env": "^1.6.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "jest": "^22.4.3",
     "unexpected": "^10.29.0"
   },
   "scripts": {
     "start": "node server.js",
+    "lint": "eslint dao/** endpoints/** server.js",
     "test": "jest"
   }
 }

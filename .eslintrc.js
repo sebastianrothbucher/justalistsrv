@@ -1,3 +1,7 @@
 module.exports = {
-    "extends": "airbnb"
+    extends: "google",
+    env: {
+        node: true,
+        es6: true
+    }
 };

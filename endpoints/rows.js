@@ -14,7 +14,7 @@ const rowsEndpoint = (app, client, req, resp) => {
         });
 };
 
-const _internalInsertUpd = (client, req, resp, _resolve) => { // one can think long & hard about just overwriting the cid - let's do this for now
+const _internalInsertUpd = (client, req, resp, _resolve, sendNotify) => { // one can think long & hard about just overwriting the cid - let's do this for now
     const q = (req.query || {});
     const newUpdRec = req.body;
     let resolution;
@@ -24,6 +24,9 @@ const _internalInsertUpd = (client, req, resp, _resolve) => { // one can think l
         resolution = Promise.reject("No new record as JSON");
     }
     return resolution.then(res => {
+        if (sendNotify && res.ok) {
+            sendNotify(res);
+        }
         resp.send(res);
     }).catch(err => {
         console.error("error writing row", err.extmsg ? err.extmsg : err);
@@ -32,10 +35,10 @@ const _internalInsertUpd = (client, req, resp, _resolve) => { // one can think l
     });
 };
 
-const rowInsertEndpoint = (app, client, req, resp) => _internalInsertUpd(client, req, resp, rowInsertDao);
+const rowInsertEndpoint = (app, client, req, resp, sendNotify) => _internalInsertUpd(client, req, resp, rowInsertDao, sendNotify);
 
-const rowUpdateEndpoint = (app, client, req, resp) => _internalInsertUpd(client, req, resp, 
-    (client, wsId, updRec, ignoreVersion) => rowUpdateDao(client, wsId, {...updRec, cid: req.params.cid}, ignoreVersion));
+const rowUpdateEndpoint = (app, client, req, resp, sendNotify) => _internalInsertUpd(client, req, resp, 
+    (client, wsId, updRec, ignoreVersion) => rowUpdateDao(client, wsId, {...updRec, cid: req.params.cid}, ignoreVersion), sendNotify);
 
 Object.defineProperty(exports, "__esModule", {
     value: true

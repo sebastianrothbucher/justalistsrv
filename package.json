@@ -21,6 +21,7 @@
     "unexpected": "^10.29.0"
   },
   "scripts": {
+    "readme": "pandoc README.md -o README.html",
     "start": "node server.js",
     "lint": "eslint dao/** endpoints/** server.js",
     "test": "jest"
